@@ -8,13 +8,91 @@
 
         <style>
             /* Your CSS code goes here. */
+            body{
+                background-color: #ffff99;
+                font-family: Arial;
+
+            }
+            h1{
+                font-size: 24px;
+            }
+            #monitor{
+                background-color: #aeaeae;
+                width: 200px;
+                border:  1px solid #101010;
+            }
+            button{
+                background-color: #585858;
+                color: #ffffff;
+            }
+            #output{
+                width: 100px;
+            }
+            #fahrenheit_lbl{
+                color: #1000fe;
+            }
+
         </style>
 
         <script>
+            function f2c(f){
+                return (f-32)*5/9;
+            }
+
             $(window).on("load", function() {
                 // Your JS code goes here.
+                //declare vars
+                let btnCheck = $("#check");
+                let btnReset = $('#reset');
+                let inpTemperature = $('#temperature');
+                let output = $('#output');
+                let chkFahrenheit = $('#fahrenheit');
+                let dateOutput = $('#date');
+
+
+                btnCheck.on("click", function () {
+                    btnReset.prop("disabled", false);
+
+                    let temperature = inpTemperature.val();
+
+                    if(chkFahrenheit.prop("checked")){
+                        temperature = f2c(temperature);
+                    }
+
+                    if(temperature <= 15){
+                        //too cold
+                        output.html("Too cold");
+                        output.css('backgroundColor', '#6699ff');
+                    }else if(temperature > 15 && temperature <= 19){
+                        //ideal
+                        output.html("Ideal");
+                        output.css('backgroundColor', '#ffcc00');
+                    }else if(temperature > 19 && temperature <= 23){
+                        //warm
+                        output.html("Warm");
+                        output.css('backgroundColor', '#ff9900');
+                    }else if(temperature > 23){
+                        //too hot
+                        output.html("Too hot");
+                        output.css('backgroundColor', '#ff0000');
+                    }
+
+                    let d = new Date();
+                    let strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+                    dateOutput.html(strDate);
+                });
+
+                btnReset.on("click", function () {
+                    inpTemperature.val(null);
+                    output.html(null);
+                    output.css('backgroundColor', '#ffffff');
+
+                    dateOutput.html(null);
+                });
             });
         </script>
+
+        <title>Temperature Monitor</title>
     </head>
 
     <body>
@@ -36,6 +114,15 @@
         </script>
         
         <!-- Your HTML code goes here. -->
-
+        <div id="monitor">
+            <h1 id="heading">Temperature Monitor</h1>
+            <input id="temperature" type="text" value="Enter temperature">
+            <input id="fahrenheit" type="checkbox">
+            <label id="fahrenheit_lbl" for="fahrenheit">Fahrenheit</label>
+            <p id="output"></p>
+            <p id="date"></p>
+            <button id="check">Check temperature</button>
+            <button id="reset" disabled="true">Reset</button>
+        </div>
     </body>
 </html>

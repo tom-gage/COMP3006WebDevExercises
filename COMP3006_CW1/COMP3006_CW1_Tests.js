@@ -41,12 +41,12 @@ suite("HTML tests", function() {
     test("#Unit test 2 checking for div presence", function() {
         chai.assert.equal($("#monitor").prop("tagName"), "DIV", "Checking that \'monitor\' is a div");
     });
-    
+
     test("#Unit test 3 testing for heading presence", function(){
         chai.assert.equal($("#heading").prop("tagName"), "H1", "Checking h1 element exists.");
         chai.assert.equal($("#heading").html(), "Temperature Monitor", "Checking heading has the correct value");
     });
-    
+
     test("#Unit test 4 testing for text input element presence", function(){
         chai.assert.equal($("#temperature").prop("tagName"), "INPUT", "Checking that \'temperature\' is an input.");
         chai.assert.equal($("#temperature").prop("type"), "text", "Checking that \'temperature\' is a text input.");
@@ -57,17 +57,17 @@ suite("HTML tests", function() {
         chai.assert.equal($("#fahrenheit").prop("tagName"), "INPUT", "Checking that \'fahrenheit\' is an input.");
         chai.assert.equal($("#fahrenheit").prop("type"), "checkbox", "Checking that \'fahrenheit\' is a checkbox input.");
     });
-    
+
     test("#Unit test 6 testing for label presence", function(){
         chai.assert.equal($("#fahrenheit_lbl").prop("tagName"), "LABEL", "Checking that \'farenheit_lbl\' is a label");
         chai.assert.equal($("#fahrenheit_lbl").prop("for"), "fahrenheit", "Checking that \'fahrenheit_lbl\' refers to the correct element");
         chai.assert.equal($("#fahrenheit_lbl").html(), "Fahrenheit", "Checking that \'fahrenheit_lbl\' has the correct value");
     });
-    
+
     test("#Unit test 7 testing for \'output\' element", function(){
         chai.assert.equal($("#output").prop("tagName"), "P", "Checking p element \'output\' exists.");
     });
-    
+
     test("#Unit test 8 testing for \'date\' element", function(){
         chai.assert.equal($("#date").prop("tagName"), "P", "Checking p element \'date\' exists.");
     });
@@ -127,14 +127,20 @@ suite("CSS tests", function() {
     });
 
     test("#Unit test 20 testing the foreground colour of the label", function() {
-        chai.assert.equal(rgb2hex($("#fahrenheit_lbl").css("color")), "#1000fe", "Label has wrong foreground colour"); 
-        
+        chai.assert.equal(rgb2hex($("#fahrenheit_lbl").css("color")), "#1000fe", "Label has wrong foreground colour");
     });
 });
 
 suite("JavaScript tests", function() {
     test("#Unit test 21 testing that the reset button is not disabled if the check button has been clicked", function() {
+        // console.log("pre-click, reset button is disabled: " + $("#reset").prop("disabled"));
+
         clickElement($("#check"));
+
+        // $("#reset").prop("disabled", false);
+
+        // console.log("post-click, reset button is disabled: " + $("#reset").prop("disabled"));
+        //if disabled is false
         chai.assert.isFalse($("#reset").prop("disabled"), "Reset button should be not be disabled if check has been clicked");
     });
 
